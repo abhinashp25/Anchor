@@ -129,7 +129,6 @@ anchor-fullstack/
 │   │   │   └── exportSnapshot.ts
 │   │   ├── store.ts          # Zustand — auth + workspace state
 │   │   └── types.ts
-│   └── vercel.json
 └── backend/
     ├── prisma/schema.prisma  # MongoDB models
     └── src/
@@ -227,22 +226,28 @@ httpOnly cookie set at login (or `Authorization: Bearer <token>` as a fallback).
 | `POST` | `/proxy` | ✅ | Execute a request server-side |
 
 ---
-
 ## Deployment
 
-**Backend** (needs a real Node process — Railway or Render):
-1. Provision MongoDB Atlas (free tier is enough to start)
-2. Set `DATABASE_URL`, `JWT_SECRET`, `CLIENT_ORIGIN`, `NODE_ENV=production`
-3. Build: `npm install && npm run build` · Start: `npm start`
-4. Run `npx prisma db push` once against production `DATABASE_URL` before first boot
+**Backend (Render Web Service):**
+1. Provision MongoDB Atlas (free tier M0 cluster).
+2. Create a new **Web Service** on Render connected to your Git repo (Root Directory: `backend`).
+3. Build Command: `npm install && npm run build` · Start Command: `npm start`
+4. Environment Variables:
+   - `DATABASE_URL` (MongoDB connection string)
+   - `JWT_SECRET` (Strong secret key)
+   - `CLIENT_ORIGIN` (Your Render frontend static site URL)
+   - `NODE_ENV=production`
+5. Run `npx prisma db push` once against production `DATABASE_URL` before first boot.
 
-**Frontend** (static — Vercel or Netlify):
-1. Set `VITE_API_URL` to the deployed backend URL
-2. `vercel.json` already includes the SPA rewrite
+**Frontend (Render Static Site):**
+1. Create a new **Static Site** on Render connected to your Git repo (Root Directory: `frontend`).
+2. Build Command: `npm install && npm run build` · Publish Directory: `dist`
+3. Add Rewrite Rule under **Redirects/Rewrites**:
+   - Source: `/*` -> Destination: `/index.html` (Action: **Rewrite**)
+4. Environment Variable:
+   - `VITE_API_URL` (Your Render backend URL)
 
-> Deploy the backend **first**. `VITE_API_URL` is compiled into the frontend bundle
-> at build time, not read at runtime — deploying frontend first means it ships
-> pointing at nothing.
+> Deploy the backend **first**. `VITE_API_URL` is compiled into the frontend bundle at build time, so you need the backend URL ready before building the frontend.
 
 ---
 
