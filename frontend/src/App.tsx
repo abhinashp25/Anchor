@@ -8,7 +8,7 @@ import { RequestPanel } from "./components/RequestPanel";
 import { ResponsePanel } from "./components/ResponsePanel";
 import { EnvironmentSwitcher } from "./components/EnvironmentSwitcher";
 import { AuthScreen } from "./components/AuthScreen";
-import { Anchor } from "lucide-react";
+
 
 export default function App() {
   const user = useStore((s) => s.user);
@@ -83,7 +83,7 @@ export default function App() {
               animate={{ opacity: 1 }}
               className="flex-1 flex flex-col items-center justify-center gap-3 text-text-faint"
             >
-              <Anchor size={32} strokeWidth={1.5} />
+              <img src="/anchor-mark.svg" alt="Anchor" className="w-8 h-8 opacity-40" />
               <p className="text-[13px]">Open a request from the sidebar, or create a new one.</p>
             </motion.div>
           )}

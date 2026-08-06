@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Anchor, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useStore } from "../store";
 
 export function AuthScreen() {
@@ -32,7 +32,7 @@ export function AuthScreen() {
         className="w-[340px] flex flex-col gap-4 bg-surface border border-border rounded-lg p-6"
       >
         <div className="flex items-center gap-2 justify-center mb-2">
-          <Anchor size={20} className="text-accent" strokeWidth={2.5} />
+          <img src="/anchor-mark.svg" alt="Anchor" className="w-5 h-5" />
           <span className="font-display font-semibold text-[16px]">Anchor</span>
         </div>
 

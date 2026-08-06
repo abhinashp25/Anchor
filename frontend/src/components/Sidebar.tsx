@@ -1,4 +1,4 @@
-import { Anchor, Download, LogOut, Trash2 } from "lucide-react";
+import { Download, LogOut, Trash2 } from "lucide-react";
 import { useStore } from "../store";
 import { CollectionTree } from "./CollectionTree";
 import { HistoryPanel } from "./HistoryPanel";
@@ -34,7 +34,7 @@ export function Sidebar() {
   return (
     <div className="w-[280px] shrink-0 border-r border-border flex flex-col bg-surface h-full">
       <div className="flex items-center gap-2 px-3 h-12 border-b border-border">
-        <Anchor size={16} className="text-accent" strokeWidth={2.5} />
+        <img src="/anchor-mark.svg" alt="Anchor" className="w-4 h-4" />
         <span className="font-display font-semibold text-[14px] tracking-tight">Anchor</span>
       </div>
 
